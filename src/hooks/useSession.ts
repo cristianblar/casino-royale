@@ -7,7 +7,11 @@ export default function useSession() {
 
   useEffect(() => {
     async function checkStatus() {
-      const checkFetch = await fetch(`${BACKEND_URL}/auth/check-status`)
+      const checkFetch = await fetch(`${BACKEND_URL}/auth/check-status`, {
+        credentials: 'include',
+        headers: { Accept: '*/*' },
+        method: 'GET'
+      })
       if (checkFetch.ok && !authenticated) setAuthenticated(true)
       if (!checkFetch.ok && authenticated) setAuthenticated(false)
     }

@@ -42,6 +42,8 @@ export default function GameContainer({
     if (!currentCredits) setCreditsModal(true)
     setLoadingGame(true)
     const gameResponse = await fetch(`${BACKEND_URL}/game/play`, {
+      credentials: 'include',
+      headers: { Accept: 'application/json' },
       method: 'GET'
     })
     if (gameResponse.status === 402) {
@@ -63,6 +65,8 @@ export default function GameContainer({
 
   const handleCashOut = async () => {
     const logoutResponse = await fetch(`${BACKEND_URL}/auth/logout`, {
+      credentials: 'include',
+      headers: { Accept: '*/*' },
       method: 'POST'
     })
     if (logoutResponse.ok) return changeAuthStatus(false)
@@ -76,9 +80,7 @@ export default function GameContainer({
           {loadingGame &&
             new Array(3)
               .fill(1)
-              .map((_, idx) => (
-                <Slot key={`loading-symbol-${idx}`} loading />
-              ))}
+              .map((_, idx) => <Slot key={`loading-symbol-${idx}`} loading />)}
           {currentSymbols.map((symbol, idx) => (
             <Slot
               key={`symbol-${symbol.id}`}

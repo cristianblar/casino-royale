@@ -63,7 +63,9 @@ export default function LoginForm({
       password: formData.password.value
     })
     const authResponse = await fetch(`${BACKEND_URL}/auth/signup-signin`, {
+      credentials: 'include',
       headers: {
+        Accept: '*/*',
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       method: 'POST',
