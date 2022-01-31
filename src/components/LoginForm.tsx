@@ -8,11 +8,12 @@ import {
   SetStateAction,
   useState
 } from 'react'
+import { Symbol } from 'interfaces'
 
 interface LoginFormProps {
   changeAuthStatus: Dispatch<SetStateAction<boolean>>
   setCurrentCredits: Dispatch<SetStateAction<number>>
-  setInitialSymbols: Dispatch<SetStateAction<Array<unknown>>>
+  setInitialSymbols: Dispatch<SetStateAction<Array<Symbol>>>
 }
 
 export default function LoginForm({
@@ -69,7 +70,7 @@ export default function LoginForm({
       body: dataToSend.toString()
     })
     if (!authResponse.ok) return setLoginError(true)
-    const { credits, symbols }: { credits: number; symbols: Array<unknown> } =
+    const { credits, symbols }: { credits: number; symbols: Array<Symbol> } =
       await authResponse.json()
     setCurrentCredits(credits)
     setInitialSymbols(symbols)
