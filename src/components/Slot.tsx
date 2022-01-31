@@ -21,6 +21,7 @@ export default function Slot({
   useEffect(() => {
     if (!initialFlag && waitTime && symbol)
       setTimeout(() => setWaitingSymbol(symbol), waitTime * 1000)
+    else setWaitingSymbol(null)
   }, [symbol])
 
   return (
@@ -38,7 +39,9 @@ export default function Slot({
             <img src={slotLoader} alt="Bouncing loader" />
           )}
           {initialFlag && symbol && <img src={symbol.url} alt="Slot fruit" />}
-          {waitingSymbol && <img src={waitingSymbol.url} alt="Slot fruit" />}
+          {!initialFlag && waitingSymbol && (
+            <img src={waitingSymbol.url} alt="Slot fruit" />
+          )}
         </Box>
       </Paper>
     </Grid>

@@ -81,7 +81,7 @@ export default function GameContainer({
             new Array(3)
               .fill(1)
               .map((_, idx) => <Slot key={`loading-symbol-${idx}`} loading />)}
-          {currentSymbols.map((symbol, idx) => (
+          {!loadingGame && currentSymbols.map((symbol, idx) => (
             <Slot
               key={`symbol-${symbol.id}`}
               symbol={symbol}
